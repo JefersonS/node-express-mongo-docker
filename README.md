@@ -15,6 +15,12 @@
 - Run: `npm install`;
 - Run: `npm start`;
 
+# Endpoints:
+
+- GET/PUT/POST/DELETE + GET All and GET with regexp (auto-complete);
+- API: `localhost:3000/services/names`;
+- View: `localhost:3000`;
+
 # Quick observations:
 
 - The test is simple, however it was built considering a possible real situation with a small amount of time. Parts of code look like an overkill for the situation while others can be improved;
