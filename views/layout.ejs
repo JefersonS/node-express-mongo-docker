@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Names</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-inverse">
+      <p>Names search</p>
+    </nav>
+  </header>
+
+  <div class="container fold-cover">
+    <div class="clearfix">
+      <h1 class="search-title">
+        Search for names</span>
+      </h1>
+    </div>
+
+    <div class="search-content">
+      <p class="search-label description">
+        All names inserted in the system will be available through this input.
+        It's possible to either look for names already registered or register new ones.
+      </p>
+      </br>
+
+      <div class="search-label">Start typing a name</div>
+      <div class="form-group">
+        <input type="text" id="name_field" class="form-control" placeholder="Ex.: Jeferson">
+      </div>
+      <button class="btn" id="" type="button">
+        <span>ENCONTRAR</span>
+      </button>
+    </div>
+
+    <div class="input-content">
+      <br>
+      <div class="search-label">Fill in a new name and position</div>
+      <form action="" id="searchForm">
+        <div class="form-group">
+          <input type="text" name="name" class="form-control" placeholder="Ex.: Schoology" minlength="3" maxlength="30"
+            required></br>
+          <select name="position" class="form-control" required>
+            <option value="" selected>Select a position</option>
+            <option value="Junior">Junior</option>
+            <option value="Middle">Middle</option>
+            <option value="Senior">Senior</option>
+          </select>
+        </div>
+        <input type="submit" class="btn" value="Insert">
+      </form>
+    </div>
+
+    <div class="result-content" id="result_div" style="display: none;">
+      <br>
+      <h3 class="search-title">
+        <span>Found name properties: </span>
+      </h3>
+      <div class="form-group">
+        <p id='result_name'></p>
+        <p id='result_position'></p>
+      </div>
+    </div>
+  </div>
+
+  </br>
+
+  <footer style="position: absolute;bottom: 0;width: 100%;">
+    <nav class="navbar navbar-inverse">
+      <p>Names search</p>
+    </nav>
+  </footer>
+</body>
+
+</html>
+<script>
+  let responseItems = [];
+
+  $("#name_field").autocomplete({
+    source: (request, response) => {
+      $.ajax({
+        url: "http://localhost:3000/services/names/auto-complete",
+        contentType: 'application/json',
+        dataType: "json",
+        data: {
+          name: request.term
+        },
+        success: (data) => {
+          responseItems = data.item || [];
+          response(responseItems.map(v => v.name));
+        }
+      });
+    },
+    minLength: 3,
+    select: (event, ui) => {
+      const item = responseItems.filter(v => v.name === ui.item.label);
+      $('#result_div').show();
+      $('#result_name').text('Name: ' + item[0].name);
+      $('#result_position').text('Position: ' + item[0].position);
+    }
+  });
+
+  $("#searchForm").submit(function (event) {
+    event.preventDefault();
+
+    const $form = $(this);
+    const data = {
+      name: $form.find("input[name='name']").val(),
+      position: $form.find("select[name='position']").val()
+    }
+    const url = 'http://localhost:3000/services/names'
+
+    const posting = $.post(url, data);
+
+    posting.done((data) => {
+      $('#result_div').show();
+      $('#result_name').text('Name: ' + data.item.name);
+      $('#result_position').text('Position: ' + data.item.position);
+
+      $form.find("input[name='name']").val('');
+      $form.find("select[name='position']").val('');
+    });
+  });
+</script>

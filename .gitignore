@@ -1,0 +1,16 @@
+# Logs
+npm-debug.log
+
+# Dependency directory
+node_modules/
+
+# IDE Stuff
+**/.idea
+.vscode/**
+
+# OS STUFF
+.DS_Store
+.tmp
+
+# Docker stuff
+data/

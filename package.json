@@ -1,0 +1,35 @@
+{
+  "name": "schoology",
+  "version": "1.0.0",
+  "description": "Test application built for interview purposes",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha src/services/**/*.test.js --require @babel/register --require babel-polyfill",
+    "start": "nodemon --exec babel-node ./src/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "faker": "^4.1.0",
+    "mongoose": "^5.6.9",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
+  }
+}
