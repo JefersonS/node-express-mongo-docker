@@ -19,6 +19,8 @@
 
 - GET/PUT/POST/DELETE + GET All and GET with regexp (auto-complete);
 - API: `localhost:3000/services/names`;
+- API query params: `id: string, name: string`;
+- API body params: `id:string, name: string, position: string enum(Junior, Middle, Senior)`;
 - View: `localhost:3000`;
 
 # Quick observations:
