@@ -12,6 +12,7 @@
 
 - Git clone repository;
 - Navigate to folder;
+- Fix mongoDB connection string to your local connection settings;
 - Run: `npm install`;
 - Run: `npm start`;
 
